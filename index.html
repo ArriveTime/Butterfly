@@ -1,0 +1,874 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101a38">
+<meta name="description" content="ByeButterfly.com — Send a Butterfly. Touch the World. Create and share beautiful butterflies carrying messages of love, gratitude, hope and kindness.">
+<meta name="robots" content="index,follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ByeButterfly.com — Send a Butterfly. Touch the World.">
+<meta property="og:description" content="A little kindness can travel a long way. Release a butterfly carrying a meaningful message.">
+<meta property="og:url" content="https://byebutterfly.com/">
+<title>ByeButterfly.com | Send a Butterfly. Touch the World.</title>
+
+<style>
+:root{
+--navy:#101a38;
+--dark:#0b132b;
+--purple:#34265c;
+--lavender:#b8a5ec;
+--pink:#ff9fcf;
+--gold:#f8d899;
+--cream:#fff8f0;
+--text:#fff;
+--muted:#d9d5eb;
+--border:rgba(255,255,255,.19);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+color:var(--text);
+background:var(--dark);
+line-height:1.65;
+overflow-x:hidden;
+}
+button,input,textarea,select{font:inherit}
+button,a{touch-action:manipulation}
+a{color:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--gold);outline-offset:4px}
+.wrap{max-width:1200px;margin:auto;padding:0 22px}
+header{
+position:sticky;top:0;z-index:50;
+background:rgba(11,19,43,.94);
+backdrop-filter:blur(16px);
+border-bottom:1px solid var(--border);
+}
+.nav{
+display:flex;align-items:center;justify-content:space-between;
+gap:18px;padding-top:15px;padding-bottom:15px;
+}
+.logo{
+font-size:clamp(21px,3vw,29px);
+font-weight:900;letter-spacing:-1px;
+text-decoration:none;white-space:nowrap;
+}
+.logo .bye{color:var(--pink)}
+.logo .butterfly{color:var(--gold)}
+.logo .com{font-size:.7em;color:white}
+.links{display:flex;gap:18px;flex-wrap:wrap}
+.links a{text-decoration:none;font-size:13px;font-weight:700}
+.links a:hover{color:var(--pink)}
+.btn{
+display:inline-flex;align-items:center;justify-content:center;
+gap:8px;border:0;border-radius:40px;
+padding:15px 25px;text-decoration:none;
+font-weight:800;font-size:14px;
+transition:transform .2s,box-shadow .2s;
+}
+.btn:hover{transform:translateY(-2px)}
+.primary{
+background:linear-gradient(110deg,#ffe4a9,#f6bd79);
+color:#241831;box-shadow:0 8px 30px #f8d89935;
+}
+.secondary{
+background:linear-gradient(110deg,#ff9fcf,#bca4ff);
+color:#251735;
+}
+.outline{
+border:1px solid #ffffff70;
+background:#ffffff10;color:white;
+}
+.small{padding:10px 17px;font-size:12px}
+.hero{
+min-height:640px;position:relative;
+display:flex;align-items:center;justify-content:center;
+text-align:center;overflow:hidden;
+background:
+radial-gradient(circle at 50% 30%,#70538b80,transparent 40%),
+radial-gradient(circle at 12% 75%,#5e77ba55,transparent 32%),
+radial-gradient(circle at 90% 70%,#f08caf33,transparent 34%),
+linear-gradient(160deg,#142447,#21183e 55%,#101a38);
+}
+.stars{
+position:absolute;inset:0;pointer-events:none;
+background-image:
+radial-gradient(#fff9 1px,transparent 1.5px),
+radial-gradient(#ffdcae99 1px,transparent 1.5px);
+background-size:75px 75px,123px 123px;
+background-position:10px 20px,45px 60px;
+opacity:.38;
+}
+.hero-content{position:relative;z-index:2;padding:105px 20px}
+.eyebrow{
+text-transform:uppercase;letter-spacing:3px;
+font-weight:900;font-size:12px;color:var(--gold);
+}
+.hero h1{
+font-size:clamp(43px,7vw,88px);
+line-height:1.08;letter-spacing:-2px;
+margin:20px auto 22px;max-width:1000px;
+}
+.hero h1 span{
+background:linear-gradient(90deg,#ffe6b3,#ff9fcf,#c4b4ff);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{
+font-size:clamp(17px,2vw,23px);
+max-width:720px;margin:0 auto 30px;color:#f0e9fa;
+}
+.actions{display:flex;justify-content:center;gap:13px;flex-wrap:wrap}
+.floating{
+position:absolute;pointer-events:none;
+font-size:50px;opacity:.78;
+animation:float 12s ease-in-out infinite;
+filter:drop-shadow(0 0 20px #ff9fcf88);
+}
+.f1{top:18%;left:8%;animation-delay:-2s}
+.f2{top:25%;right:11%;font-size:65px;animation-delay:-6s}
+.f3{bottom:15%;left:17%;font-size:38px;animation-delay:-9s}
+.f4{bottom:14%;right:15%;font-size:44px;animation-delay:-4s}
+@keyframes float{
+0%,100%{transform:translate(0,0) rotate(-12deg)}
+25%{transform:translate(28px,-25px) rotate(12deg)}
+50%{transform:translate(-15px,10px) rotate(-8deg)}
+75%{transform:translate(20px,20px) rotate(10deg)}
+}
+section.section{padding:80px 0}
+.section-title{text-align:center;margin-bottom:38px}
+.section-title h2{
+font-size:clamp(30px,4.5vw,48px);
+line-height:1.18;margin:12px 0;
+}
+.section-title p{
+color:var(--muted);max-width:740px;
+margin:0 auto;font-size:16px;
+}
+.gradient{
+background:linear-gradient(90deg,#ffd899,#ff9fcf,#bca4ff);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.features{
+display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+}
+.feature,.glass{
+background:linear-gradient(140deg,#30244d,#192443);
+border:1px solid var(--border);
+border-radius:22px;padding:28px;
+}
+.feature-icon{font-size:43px;margin-bottom:14px}
+.feature h3{font-size:21px;margin:0 0 10px}
+.feature p{color:var(--muted);font-size:14px;margin:0}
+.alt{
+background:linear-gradient(160deg,#171d3c,#2a2048);
+border-top:1px solid #ffffff10;
+border-bottom:1px solid #ffffff10;
+}
+.creator{
+max-width:900px;margin:auto;
+border:1px solid #eac99d70;
+border-radius:26px;
+background:linear-gradient(140deg,#35234e,#192544);
+padding:35px;
+box-shadow:0 20px 70px #0003;
+}
+.form-grid{
+display:grid;grid-template-columns:1fr 1fr;
+gap:18px;
+}
+.field{display:flex;flex-direction:column;gap:8px;margin-bottom:19px}
+.field label{font-weight:800;font-size:14px;color:#ffe6b8}
+.field input,.field select,.field textarea{
+width:100%;border:1px solid #ffffff50;
+border-radius:12px;background:#ffffff12;
+padding:14px;color:white;outline:none;
+}
+.field select option{color:#111}
+.field input::placeholder,.field textarea::placeholder{color:#bcb3cf}
+.field input:focus,.field textarea:focus,.field select:focus{
+border-color:var(--gold);box-shadow:0 0 0 3px #f8d89920;
+}
+.field textarea{min-height:145px;resize:vertical}
+.help{font-size:12px;color:#cfc5df}
+.colors{display:flex;gap:13px;flex-wrap:wrap}
+.color-option{
+width:45px;height:45px;border-radius:50%;
+border:3px solid #ffffff77;
+transition:transform .2s;
+}
+.color-option[aria-pressed="true"]{
+outline:3px solid var(--gold);
+outline-offset:3px;transform:scale(1.1);
+}
+.color-pink{background:#ff9fcf}
+.color-blue{background:#83d9ff}
+.color-gold{background:#f8d899}
+.color-purple{background:#c2a0ff}
+.color-green{background:#a6ebbd}
+.preview-area{
+text-align:center;background:#ffffff0c;
+border:1px solid #ffffff2b;
+border-radius:18px;padding:24px;margin:15px 0 24px;
+}
+.preview-butterfly{
+font-size:88px;display:inline-block;
+animation:float 9s ease-in-out infinite;
+filter:drop-shadow(0 0 18px var(--wing));
+}
+.preview-area h3{margin:4px 0}
+.preview-area p{color:var(--muted);margin:0}
+.full{width:100%}
+.notice{
+font-size:12px;color:#cfc5df;line-height:1.8;
+margin-top:16px;
+}
+.result{display:none;margin-top:24px}
+.result.show{display:block}
+.result-card{
+border:1px solid #f8d89988;border-radius:20px;
+padding:28px;background:linear-gradient(140deg,#413054,#182544);
+text-align:center;
+}
+.result-card h3{font-size:27px;margin:8px 0}
+.message{
+font-size:18px;font-style:italic;
+white-space:pre-wrap;overflow-wrap:anywhere;
+color:#fff3e5;line-height:1.9;
+}
+.share-link{
+width:100%;padding:13px;border-radius:10px;
+border:1px solid #ffffff55;background:#10182e;
+color:#fff;overflow-wrap:anywhere;
+font-size:13px;
+}
+.share-buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:18px}
+.map-panel{
+background:linear-gradient(135deg,#152444,#20284c);
+border:1px solid #ffffff28;
+border-radius:24px;padding:20px;overflow:hidden;
+}
+.world-map{width:100%;height:auto;display:block}
+.map-land{fill:#496277;stroke:#7392a1;stroke-width:.8;opacity:.85}
+.map-grid{stroke:#b5cde2;stroke-opacity:.15;stroke-width:.6}
+.map-pin{fill:#ffd899;stroke:#fff;stroke-width:2}
+.map-note{text-align:center;color:#d7cce8;font-size:13px;margin:15px 0 0}
+.passport{
+display:grid;grid-template-columns:repeat(3,1fr);
+gap:15px;margin-top:20px;
+}
+.stat{
+background:#ffffff0d;border:1px solid #ffffff22;
+border-radius:15px;text-align:center;padding:19px 10px;
+}
+.stat strong{display:block;font-size:27px;color:var(--gold)}
+.stat span{font-size:12px;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.step{text-align:center;padding:28px 20px}
+.step-number{
+width:54px;height:54px;border-radius:50%;
+background:linear-gradient(135deg,#ff9fcf,#f8d899);
+color:#241832;font-size:24px;font-weight:900;
+display:grid;place-items:center;margin:0 auto 15px;
+}
+.step h3{margin:0 0 10px}
+.step p{color:var(--muted);font-size:14px;margin:0}
+.quote{
+font-size:clamp(23px,3.5vw,39px);
+text-align:center;line-height:1.5;
+max-width:900px;margin:auto;font-weight:700;
+}
+.center{text-align:center}
+.footer{
+padding:50px 20px;text-align:center;
+background:#080e22;border-top:1px solid #ffffff24;
+}
+.footer p{color:var(--muted);font-size:13px;max-width:950px;margin:15px auto}
+.footer a{color:var(--gold)}
+.toast{
+position:fixed;bottom:22px;left:50%;
+transform:translateX(-50%);
+background:#f8d899;color:#1c1932;
+padding:13px 22px;border-radius:30px;
+font-size:13px;font-weight:800;
+z-index:100;box-shadow:0 10px 30px #0007;
+display:none;text-align:center;
+}
+.toast.show{display:block}
+.hidden{display:none!important}
+@media(max-width:800px){
+.features,.steps{grid-template-columns:1fr}
+.form-grid{grid-template-columns:1fr;gap:0}
+.nav{flex-direction:column}
+.links{justify-content:center;gap:12px}
+.hero{min-height:560px}
+.creator{padding:22px}
+section.section{padding:55px 0}
+}
+@media(max-width:480px){
+.hero h1{letter-spacing:-1px}
+.floating{font-size:30px;opacity:.45}
+.passport{gap:7px}
+.stat{padding:13px 4px}
+.stat strong{font-size:21px}
+.stat span{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+html{scroll-behavior:auto}
+.floating,.preview-butterfly{animation:none}
+.btn{transition:none}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="wrap nav">
+<a class="logo" href="#home">
+<span class="bye">Bye</span><span class="butterfly">Butterfly</span><span class="com">.com</span> 🦋
+</a>
+<nav class="links" aria-label="Main navigation">
+<a href="#how">How It Works</a>
+<a href="#create">Create Butterfly</a>
+<a href="#journey">World Map</a>
+<a href="#mission">Our Mission</a>
+</nav>
+</div>
+</header>
+
+<main>
+
+<section class="hero" id="home">
+<div class="stars"></div>
+<div class="floating f1" aria-hidden="true">🦋</div>
+<div class="floating f2" aria-hidden="true">🦋</div>
+<div class="floating f3" aria-hidden="true">🦋</div>
+<div class="floating f4" aria-hidden="true">🦋</div>
+
+<div class="hero-content">
+<div class="eyebrow">One Butterfly. One Message. Endless Possibilities.</div>
+<h1>Send a Butterfly.<br><span>Touch the World.</span></h1>
+<p>Sometimes the smallest gesture can make the biggest difference. Send a butterfly carrying love, gratitude, hope, encouragement, or a message from your heart.</p>
+<div class="actions">
+<a class="btn primary" href="#create">🦋 RELEASE YOUR BUTTERFLY</a>
+<a class="btn outline" href="#how">DISCOVER HOW IT WORKS</a>
+</div>
+<p style="font-size:13px;margin-top:25px;color:#ffe7bb">Free to use • No registration • Share kindness anywhere</p>
+</div>
+</section>
+
+<section class="section" id="how">
+<div class="wrap">
+<div class="section-title">
+<div class="eyebrow">A Beautifully Simple Idea</div>
+<h2>One Small Message. <span class="gradient">A World of Meaning.</span></h2>
+<p>Every butterfly begins with someone who has something meaningful to say.</p>
+</div>
+
+<div class="steps">
+<div class="step">
+<div class="step-number">1</div>
+<h3>Create Your Butterfly</h3>
+<p>Choose its color and write a personal message of gratitude, love, hope, or encouragement.</p>
+</div>
+<div class="step">
+<div class="step-number">2</div>
+<h3>Let It Fly</h3>
+<p>Share your butterfly through a personalized link with someone special or anyone who could use kindness.</p>
+</div>
+<div class="step">
+<div class="step-number">3</div>
+<h3>Make a Difference</h3>
+<p>The recipient opens your message and can create another butterfly to pass kindness along.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section alt" id="create">
+<div class="wrap">
+<div class="section-title">
+<div class="eyebrow">Begin Your Butterfly's Journey</div>
+<h2>🦋 Release <span class="gradient">Your Butterfly</span></h2>
+<p>Give your butterfly a message, a color, and a place to begin its journey.</p>
+</div>
+
+<div class="creator">
+<form id="butterflyForm">
+
+<div class="form-grid">
+<div class="field">
+<label for="sender">Your Name or Nickname</label>
+<input id="sender" maxlength="60" placeholder="Your name (optional)">
+</div>
+
+<div class="field">
+<label for="recipient">Who Is This Butterfly For?</label>
+<input id="recipient" maxlength="70" placeholder="Someone special, or Everyone">
+</div>
+</div>
+
+<div class="form-grid">
+<div class="field">
+<label for="category">What Is Your Message About?</label>
+<select id="category">
+<option value="Kindness">💛 Kindness</option>
+<option value="Gratitude">🙏 Gratitude</option>
+<option value="Love">❤️ Love</option>
+<option value="Hope">🌈 Hope</option>
+<option value="Encouragement">✨ Encouragement</option>
+<option value="Remembrance">🕊️ Remembrance</option>
+</select>
+</div>
+
+<div class="field">
+<label for="city">Starting City or Country</label>
+<input id="city" maxlength="90" placeholder="Example: Williamsburg, Virginia">
+</div>
+</div>
+
+<div class="field">
+<label>Choose Your Butterfly's Color</label>
+<div class="colors" role="group" aria-label="Butterfly color">
+<button type="button" class="color-option color-pink" data-color="pink" aria-label="Pink butterfly" aria-pressed="true"></button>
+<button type="button" class="color-option color-blue" data-color="blue" aria-label="Blue butterfly" aria-pressed="false"></button>
+<button type="button" class="color-option color-gold" data-color="gold" aria-label="Gold butterfly" aria-pressed="false"></button>
+<button type="button" class="color-option color-purple" data-color="purple" aria-label="Purple butterfly" aria-pressed="false"></button>
+<button type="button" class="color-option color-green" data-color="green" aria-label="Green butterfly" aria-pressed="false"></button>
+</div>
+</div>
+
+<div class="field">
+<label for="message">Your Message to the World</label>
+<textarea id="message" maxlength="600" required placeholder="Dear someone special,
+
+I wanted you to know that you made a difference in my life..."></textarea>
+<div class="help"><span id="charCount">0</span> / 600 characters</div>
+</div>
+
+<div class="preview-area">
+<div id="previewButterfly" class="preview-butterfly" style="--wing:#ff9fcf">🦋</div>
+<h3>Your Butterfly Is Ready</h3>
+<p>Every butterfly carries a little piece of someone's heart.</p>
+</div>
+
+<button type="submit" class="btn primary full">🦋 RELEASE MY BUTTERFLY</button>
+
+<p class="notice">Your message will be encoded in a shareable link, not uploaded to a public database. Anyone with the link can read it, so please don't include sensitive or confidential information. Creating a butterfly does not send it automatically—you choose whom to share it with.</p>
+
+</form>
+
+<div class="result" id="result" aria-live="polite">
+<div class="result-card">
+<div class="eyebrow">Your Butterfly Has Been Created</div>
+<div id="resultButterfly" style="font-size:95px">🦋</div>
+<h3>Your Butterfly Is Ready to Fly!</h3>
+<p id="resultRecipient"></p>
+<p class="message" id="resultMessage"></p>
+<p id="resultSender"></p>
+<p id="resultOrigin" style="color:#ffe4ad"></p>
+
+<div class="field">
+<label for="shareLink">Your Butterfly's Personal Link</label>
+<textarea id="shareLink" class="share-link" rows="4" readonly></textarea>
+</div>
+
+<div class="share-buttons">
+<button class="btn primary" id="copyLink" type="button">📋 COPY LINK</button>
+<button class="btn secondary" id="shareButterfly" type="button">💌 SHARE BUTTERFLY</button>
+<button class="btn outline" id="viewButterfly" type="button">🦋 VIEW BUTTERFLY</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="journey">
+<div class="wrap">
+<div class="section-title">
+<div class="eyebrow">The Butterfly Passport</div>
+<h2>A Journey That <span class="gradient">Begins With You</span></h2>
+<p>Every butterfly has a story. In this first version, its passport shows the starting location you provide. Future worldwide tracking will require a connected database.</p>
+</div>
+
+<div class="map-panel">
+<svg class="world-map" viewBox="0 0 1000 500" role="img" aria-label="Stylized world map showing an illustrative butterfly journey">
+<rect width="1000" height="500" rx="12" fill="#152b4c"/>
+
+<g class="map-grid">
+<path d="M0 100H1000M0 200H1000M0 300H1000M0 400H1000"/>
+<path d="M100 0V500M200 0V500M300 0V500M400 0V500M500 0V500M600 0V500M700 0V500M800 0V500M900 0V500"/>
+</g>
+
+<g class="map-land">
+<path d="M35 80L83 50 140 55 180 72 215 67 258 92 269 119 248 149 225 162 210 193 181 211 160 242 133 227 125 192 92 182 75 150 42 139Z"/>
+<path d="M183 258L222 244 256 266 279 302 274 340 257 372 249 408 223 455 203 430 198 388 181 349 164 311Z"/>
+<path d="M350 110L388 89 417 99 435 117 421 143 397 149 385 171 365 159Z"/>
+<path d="M380 180L420 168 459 192 488 231 476 277 451 322 425 380 396 364 377 318 363 265 349 225Z"/>
+<path d="M429 105L478 75 524 83 566 62 614 70 660 90 700 76 751 94 807 105 857 128 890 155 878 187 838 201 806 229 770 216 742 244 712 232 684 261 647 249 616 217 586 205 556 177 526 190 502 159 465 151Z"/>
+<path d="M731 281L766 267 805 284 828 321 869 328 898 355 881 395 832 409 791 390 761 363 734 344Z"/>
+<path d="M282 69L313 44 346 57 334 91 304 104Z"/>
+<path d="M922 370L948 365 956 393 934 405Z"/>
+</g>
+
+<path d="M170 170 Q360 35 490 155 T790 290"
+fill="none" stroke="#f8d899" stroke-width="4"
+stroke-dasharray="10 11" opacity=".85"/>
+
+<circle cx="170" cy="170" r="10" class="map-pin"/>
+<circle cx="490" cy="155" r="10" class="map-pin"/>
+<circle cx="790" cy="290" r="10" class="map-pin"/>
+
+<g fill="#fff5df" font-size="19" font-weight="bold" text-anchor="middle">
+<text x="170" y="201">Los Angeles</text>
+<text x="490" y="186">London</text>
+<text x="790" y="323">Tokyo</text>
+</g>
+
+<text x="490" y="128" text-anchor="middle" font-size="51">🦋</text>
+</svg>
+
+<p class="map-note">Illustrative route only: Los Angeles → London → Tokyo. This is not a live tracking map.</p>
+
+<div class="passport">
+<div class="stat">
+<strong id="passportCount">0</strong>
+<span>Butterflies created on this device</span>
+</div>
+<div class="stat">
+<strong id="passportOrigin">—</strong>
+<span>Latest starting location</span>
+</div>
+<div class="stat">
+<strong>∞</strong>
+<span>Possibilities for kindness</span>
+</div>
+</div>
+
+<div class="center" style="margin-top:25px">
+<a class="btn secondary" href="#create">🦋 START A NEW JOURNEY</a>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section alt" id="mission">
+<div class="wrap">
+<div class="section-title">
+<div class="eyebrow">Why We Exist</div>
+<h2>Our Mission: <span class="gradient">Make Kindness Travel</span></h2>
+<p>We believe one meaningful message can brighten someone's day, restore hope, or remind a person that they matter.</p>
+</div>
+
+<div class="features">
+<div class="feature">
+<div class="feature-icon">💗</div>
+<h3>Spread Appreciation</h3>
+<p>Thank someone who helped you, believed in you, or made your life a little better.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🌍</div>
+<h3>Connect the World</h3>
+<p>Share heartfelt messages across borders, languages, generations and communities.</p>
+</div>
+
+<div class="feature">
+<div class="feature-icon">🕊️</div>
+<h3>Choose Kindness</h3>
+<p>Offer encouragement and compassion instead of arguments, negativity or judgment.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="wrap">
+<p class="quote">“You may never know how much you meant to someone. Until today.”</p>
+<div class="center" style="margin-top:30px">
+<a href="#create" class="btn primary">🦋 SEND SOMEONE A BUTTERFLY</a>
+</div>
+</div>
+</section>
+
+</main>
+
+<footer class="footer">
+<div class="logo">
+<span class="bye">Bye</span><span class="butterfly">Butterfly</span><span class="com">.com</span> 🦋
+</div>
+<strong style="color:#f8d899">Send a Butterfly. Touch the World.</strong>
+
+<p>A free place to share kindness, love, gratitude, hope, encouragement and meaningful messages.</p>
+
+<p>Privacy: Butterfly messages are stored in the shareable link itself and may also be saved locally on your device for convenience. Anyone who receives the link can read its contents. Please avoid sharing private personal information. No public comments, visitor tracking, or worldwide delivery tracking are included in this version.</p>
+
+<p>Be respectful. Do not use this website to harass, threaten, impersonate or disclose another person's private information. This service is provided as-is without a guarantee of delivery, continued availability, or preservation of messages.</p>
+
+<p>&copy; <span id="year">2026</span> ByeButterfly.com. All rights reserved.</p>
+</footer>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const form = document.getElementById("butterflyForm");
+const messageInput = document.getElementById("message");
+const charCount = document.getElementById("charCount");
+const result = document.getElementById("result");
+const preview = document.getElementById("previewButterfly");
+const shareLink = document.getElementById("shareLink");
+const toast = document.getElementById("toast");
+
+const palette = {
+pink:"#ff9fcf",
+blue:"#83d9ff",
+gold:"#f8d899",
+purple:"#c2a0ff",
+green:"#a6ebbd"
+};
+
+let selectedColor = "pink";
+let toastTimeout;
+
+document.getElementById("year").textContent =
+new Date().getFullYear();
+
+messageInput.addEventListener("input",function(){
+charCount.textContent = messageInput.value.length;
+});
+
+document.querySelectorAll(".color-option").forEach(button=>{
+button.addEventListener("click",function(){
+selectedColor = button.dataset.color;
+
+document.querySelectorAll(".color-option").forEach(b=>{
+b.setAttribute("aria-pressed",b===button?"true":"false");
+});
+
+preview.style.setProperty("--wing",palette[selectedColor]);
+});
+});
+
+function showToast(text){
+toast.textContent=text;
+toast.classList.add("show");
+clearTimeout(toastTimeout);
+toastTimeout=setTimeout(()=>{
+toast.classList.remove("show");
+},3500);
+}
+
+/* Encode Unicode safely for URL sharing */
+
+function encodeData(data){
+const json=JSON.stringify(data);
+const bytes=new TextEncoder().encode(json);
+let binary="";
+for(const byte of bytes){
+binary+=String.fromCharCode(byte);
+}
+return btoa(binary)
+.replace(/\+/g,"-")
+.replace(/\//g,"_")
+.replace(/=+$/,"");
+}
+
+function decodeData(value){
+const base64=value.replace(/-/g,"+").replace(/_/g,"/");
+const padded=base64.padEnd(
+Math.ceil(base64.length/4)*4,"="
+);
+const binary=atob(padded);
+const bytes=Uint8Array.from(binary,c=>c.charCodeAt(0));
+return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function cleanText(value,max){
+return String(value||"").trim().slice(0,max);
+}
+
+function createButterfly(data){
+const base=window.location.origin+window.location.pathname;
+const link=base+"#butterfly="+encodeData(data);
+return link;
+}
+
+function renderButterfly(data,link){
+const recipient=cleanText(data.recipient,70);
+const sender=cleanText(data.sender,60);
+const city=cleanText(data.city,90);
+const message=cleanText(data.message,600);
+const color=palette[data.color]||palette.pink;
+
+document.getElementById("resultButterfly").style.filter=
+"drop-shadow(0 0 24px "+color+")";
+
+document.getElementById("resultRecipient").textContent=
+recipient?"For: "+recipient:"For someone who needs kindness";
+
+document.getElementById("resultMessage").textContent=message;
+
+document.getElementById("resultSender").textContent=
+sender?"With love, "+sender:"Sent with kindness";
+
+document.getElementById("resultOrigin").textContent=
+city?"Starting in: "+city:"A butterfly from the heart";
+
+shareLink.value=link;
+result.classList.add("show");
+result.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function updatePassport(city){
+let count=0;
+
+try{
+count=Number(localStorage.getItem("bb_count")||0);
+if(!Number.isFinite(count)||count<0)count=0;
+count++;
+localStorage.setItem("bb_count",String(count));
+localStorage.setItem("bb_origin",city||"Not specified");
+}catch(error){
+count=0;
+}
+
+document.getElementById("passportCount").textContent=count;
+document.getElementById("passportOrigin").textContent=
+city||"Not specified";
+}
+
+function loadPassport(){
+try{
+document.getElementById("passportCount").textContent=
+localStorage.getItem("bb_count")||"0";
+
+document.getElementById("passportOrigin").textContent=
+localStorage.getItem("bb_origin")||"—";
+}catch(error){}
+}
+
+form.addEventListener("submit",function(event){
+event.preventDefault();
+
+const data={
+v:1,
+sender:cleanText(document.getElementById("sender").value,60),
+recipient:cleanText(document.getElementById("recipient").value,70),
+city:cleanText(document.getElementById("city").value,90),
+category:document.getElementById("category").value,
+color:selectedColor,
+message:cleanText(messageInput.value,600),
+created:new Date().toISOString()
+};
+
+if(!data.message){
+showToast("Please write a message for your butterfly.");
+messageInput.focus();
+return;
+}
+
+const link=createButterfly(data);
+
+renderButterfly(data,link);
+updatePassport(data.city);
+
+showToast("Your butterfly is ready to share!");
+});
+
+document.getElementById("copyLink").addEventListener("click",async function(){
+try{
+await navigator.clipboard.writeText(shareLink.value);
+showToast("Butterfly link copied!");
+}catch(error){
+shareLink.focus();
+shareLink.select();
+showToast("Select and copy the link above.");
+}
+});
+
+document.getElementById("shareButterfly").addEventListener("click",async function(){
+const url=shareLink.value;
+
+if(navigator.share){
+try{
+await navigator.share({
+title:"A Butterfly Has Arrived For You 🦋",
+text:"Someone has sent you a butterfly carrying a meaningful message.",
+url:url
+});
+}catch(error){
+if(error.name!=="AbortError"){
+showToast("Please copy the link to share it.");
+}
+}
+}else{
+try{
+await navigator.clipboard.writeText(url);
+showToast("Link copied! Share it with someone special.");
+}catch(error){
+shareLink.focus();
+shareLink.select();
+showToast("Copy the selected link to share it.");
+}
+}
+});
+
+document.getElementById("viewButterfly").addEventListener("click",function(){
+if(shareLink.value){
+window.location.href=shareLink.value;
+window.location.reload();
+}
+});
+
+/* Open butterflies received through shared links */
+
+function openReceivedButterfly(){
+const hash=window.location.hash;
+
+if(!hash.startsWith("#butterfly="))return;
+
+try{
+const encoded=hash.slice("#butterfly=".length);
+
+if(encoded.length>6000){
+throw new Error("Link too large");
+}
+
+const data=decodeData(encoded);
+
+if(!data||typeof data.message!=="string"||
+!data.message.trim()){
+throw new Error("Invalid butterfly");
+}
+
+const safeData={
+sender:cleanText(data.sender,60),
+recipient:cleanText(data.recipient,70),
+city:cleanText(data.city,90),
+message:cleanText(data.message,600),
+color:palette[data.color]?data.color:"pink"
+};
+
+renderButterfly(safeData,window.location.href);
+showToast("A butterfly has arrived for you! 🦋");
+
+}catch(error){
+showToast("This butterfly link could not be opened.");
+}
+}
+
+loadPassport();
+openReceivedButterfly();
+
+</script>
+
+</body>
+</html>
