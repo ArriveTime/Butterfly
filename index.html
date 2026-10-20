@@ -8,6 +8,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="ByeButterfly.com — Send a Butterfly. Touch the World.">
 <meta property="og:description" content="Send a meaningful butterfly and follow its journey around the world.">
+<meta property="og:image" content="https://arrivetime.github.io/Butterfly/butterfly-background.png">
+<meta name="twitter:card" content="summary_large_image">
 <title>ByeButterfly.com | Send a Butterfly. Touch the World.</title>
 
 <style>
@@ -246,6 +248,14 @@ section.section{padding:80px 0}
 }
 .share-buttons{margin-top:18px}
 .share-buttons .btn{min-width:155px}
+.social-share{margin-top:24px;padding:20px;border:1px solid #ffffff35;border-radius:16px;background:#ffffff0b}
+.social-share h4{color:var(--gold);margin:0 0 8px;font-size:20px}
+.social-share p{color:var(--muted);font-size:13px;margin:0 0 14px}
+.social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px}
+.social-grid button{min-height:48px;padding:10px 8px;border-radius:12px;border:1px solid #ffffff4d;background:#ffffff15;color:white;font-weight:700}
+.social-grid button:hover{background:#ffffff2a}
+.location-suggest{border:1px solid #ffffff44;background:#ffffff0a;padding:15px;border-radius:14px;margin:12px 0 20px}
+.location-suggest p{margin:9px 0;font-size:13px;color:var(--muted)}
 .delivery-heading{
  color:#ffe3a4;font-size:19px;margin:26px 0 6px
 }
@@ -561,6 +571,22 @@ I wanted you to know that you made a difference in my life..."></textarea>
       <button class="btn outline" id="viewButterfly" type="button">🦋 VIEW BUTTERFLY</button>
      </div>
 
+      <div class="social-share" aria-label="Share on social media">
+       <h4>🦋 Help This Butterfly Travel the World</h4>
+       <p>Share the same butterfly link so its passport journey stays together. You choose where to post.</p>
+       <div class="social-grid">
+        <button type="button" data-social="facebook">Facebook</button>
+        <button type="button" data-social="instagram">Instagram</button>
+        <button type="button" data-social="linkedin">LinkedIn</button>
+        <button type="button" data-social="whatsapp">WhatsApp</button>
+        <button type="button" data-social="x">X</button>
+        <button type="button" data-social="telegram">Telegram</button>
+        <button type="button" data-social="pinterest">Pinterest</button>
+        <button type="button" data-social="more">More options</button>
+       </div>
+       <p class="notice" style="margin-top:12px">Instagram and Pinterest require an additional posting step. The link can be copied for a message, Story, or post. Public posts may be visible beyond the intended recipient.</p>
+      </div>
+
      <div class="field" style="margin-top:26px">
       <label for="shareLink">Your Butterfly's Personal Link</label>
       <textarea id="shareLink" class="share-link" rows="3" readonly></textarea>
@@ -585,16 +611,19 @@ I wanted you to know that you made a difference in my life..."></textarea>
 
       <p id="passportOrigin" class="center"></p>
 
-      <h4 style="color:var(--gold)">🌍 Recorded Journey</h4>
-      <ol id="journeyList" class="journey-list"></ol>
-      <p id="journeyStatus" class="status"></p>
-
       <div class="arrival-form" id="arrivalArea">
        <h4>📍 I Received This Butterfly</h4>
        <p class="delivery-note">
         Help this butterfly travel the world.
         Record your city and country. No GPS or address is required.
        </p>
+       <div class="location-suggest">
+        <strong>🌍 Make arrival check-in easier</strong>
+        <p>Optional: suggest your approximate city and country using your internet connection. Review and edit the suggestion before recording.</p>
+        <button type="button" class="btn outline" id="suggestLocation">📍 SUGGEST MY CITY &amp; COUNTRY</button>
+        <p class="notice">Only if you click this button, a third-party service (ipwho.is) will receive your IP address to estimate your location. No GPS is used, and nothing is added to the passport until you click Record My Arrival.</p>
+        <p id="suggestionStatus" class="status" aria-live="polite"></p>
+       </div>
        <form id="arrivalForm">
         <div class="form-grid">
          <div class="field">
@@ -617,6 +646,11 @@ I wanted you to know that you made a difference in my life..."></textarea>
         Locations are visible to anyone with the butterfly link.
        </p>
       </div>
+
+
+      <h4 style="color:var(--gold)">🌍 Recorded Journey</h4>
+      <ol id="journeyList" class="journey-list"></ol>
+      <p id="journeyStatus" class="status"></p>
 
       <p class="delivery-note center" style="margin-top:20px">
        The passport records visits when recipients choose to submit their location.
@@ -939,6 +973,8 @@ function renderButterfly(data,link,isReceived,id=null){
  );
 
  $("arrivalStatus").textContent="";
+  $("suggestionStatus").textContent="";
+  $("arrivalForm").reset();
  $("journeyList").replaceChildren();
  $("stopCount").textContent="0";
  $("countryCount").textContent="0";
@@ -1078,6 +1114,33 @@ async function loadPassport(id){
   }
  }
 }
+
+/* OPTIONAL APPROXIMATE LOCATION SUGGESTION */
+
+$("suggestLocation").addEventListener("click",async()=>{
+ const button=$("suggestLocation");
+ const status=$("suggestionStatus");
+ if(button.disabled)return;
+ button.disabled=true;
+ status.textContent="Looking up an approximate city and country...";
+ const controller=new AbortController();
+ const timeout=setTimeout(()=>controller.abort(),10000);
+ try{
+  const response=await fetch("https://ipwho.is/",{signal:controller.signal,cache:"no-store"});
+  if(!response.ok)throw new Error("Service unavailable");
+  const data=await response.json();
+  if(data.success===false||!data.city||!data.country)throw new Error("No city or country found");
+  $("arrivalCity").value=clean(data.city,100);
+  $("arrivalCountry").value=clean(data.country,100);
+  status.textContent="Suggestion added. Please check or edit both fields, then click Record My Arrival. Nothing has been saved yet.";
+ }catch(error){
+  console.warn("Location suggestion error:",error);
+  status.textContent="Could not suggest your location. Please type your city and country instead.";
+ }finally{
+  clearTimeout(timeout);
+  button.disabled=false;
+ }
+});
 
 /* RECORD AN ARRIVAL */
 
@@ -1241,6 +1304,35 @@ $("shareButterfly").addEventListener("click",shareButterfly);
 $("passEmail").addEventListener("click",sendByEmail);
 $("passText").addEventListener("click",sendByText);
 $("passCopy").addEventListener("click",copyButterfly);
+
+/* SOCIAL SHARING — THE SAME PASSPORT LINK IS USED EVERYWHERE */
+
+async function socialShare(platform){
+ if(!currentLink){notify("Create or open a butterfly first.");return;}
+ const url=encodeURIComponent(currentLink);
+ const message=encodeURIComponent("🦋 Someone sent a butterfly carrying a message of kindness. Help it travel the world!");
+ const destinations={
+  facebook:"https://www.facebook.com/sharer/sharer.php?u="+url,
+  linkedin:"https://www.linkedin.com/sharing/share-offsite/?url="+url,
+  whatsapp:"https://api.whatsapp.com/send?text="+message+"%20"+url,
+  x:"https://twitter.com/intent/tweet?text="+message+"&url="+url,
+  telegram:"https://t.me/share/url?url="+url+"&text="+message
+ };
+ if(platform==="more"){await shareButterfly();return;}
+ if(platform==="instagram"||platform==="pinterest"){
+  await copyButterfly();
+  notify(platform==="instagram"?"Link copied. Paste it in an Instagram message, bio, or Story link sticker.":"Link copied. Open Pinterest and create a Pin using a butterfly image and this link.");
+  return;
+ }
+ if(destinations[platform]){
+  const popup=window.open(destinations[platform],"_blank","noopener,noreferrer");
+  if(!popup)notify("Pop-up blocked. Please use Copy Link instead.");
+ }
+}
+
+document.querySelectorAll("[data-social]").forEach(button=>{
+ button.addEventListener("click",()=>socialShare(button.dataset.social));
+});
 
 $("viewButterfly").addEventListener("click",()=>{
  if(!currentLink)return;
