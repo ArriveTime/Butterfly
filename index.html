@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -85,16 +86,42 @@ border:1px solid #ffffff70;
 background:#ffffff10;color:white;
 }
 .small{padding:10px 17px;font-size:12px}
+
+/* NEW BEAUTIFUL BUTTERFLY BACKGROUND */
+
 .hero{
-min-height:640px;position:relative;
-display:flex;align-items:center;justify-content:center;
-text-align:center;overflow:hidden;
+min-height:690px;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+overflow:hidden;
 background:
-radial-gradient(circle at 50% 30%,#70538b80,transparent 40%),
-radial-gradient(circle at 12% 75%,#5e77ba55,transparent 32%),
-radial-gradient(circle at 90% 70%,#f08caf33,transparent 34%),
-linear-gradient(160deg,#142447,#21183e 55%,#101a38);
+linear-gradient(
+rgba(13,18,40,.36),
+rgba(13,18,40,.66)
+),
+url("butterfly-background.png")
+center center / cover no-repeat;
+background-color:#30243e;
 }
+
+/* Keep the photo visible and text easy to read */
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(
+ellipse at center,
+rgba(12,16,36,.30),
+transparent 75%
+);
+pointer-events:none;
+}
+
 .stars{
 position:absolute;inset:0;pointer-events:none;
 background-image:
@@ -102,9 +129,13 @@ radial-gradient(#fff9 1px,transparent 1.5px),
 radial-gradient(#ffdcae99 1px,transparent 1.5px);
 background-size:75px 75px,123px 123px;
 background-position:10px 20px,45px 60px;
-opacity:.38;
+opacity:.20;
 }
-.hero-content{position:relative;z-index:2;padding:105px 20px}
+.hero-content{
+position:relative;
+z-index:2;
+padding:105px 20px;
+}
 .eyebrow{
 text-transform:uppercase;letter-spacing:3px;
 font-weight:900;font-size:12px;color:var(--gold);
@@ -113,14 +144,20 @@ font-weight:900;font-size:12px;color:var(--gold);
 font-size:clamp(43px,7vw,88px);
 line-height:1.08;letter-spacing:-2px;
 margin:20px auto 22px;max-width:1000px;
+text-shadow:0 4px 25px rgba(0,0,0,.65);
 }
 .hero h1 span{
 background:linear-gradient(90deg,#ffe6b3,#ff9fcf,#c4b4ff);
--webkit-background-clip:text;background-clip:text;color:transparent;
+-webkit-background-clip:text;
+background-clip:text;
+color:transparent;
 }
 .hero p{
 font-size:clamp(17px,2vw,23px);
-max-width:720px;margin:0 auto 30px;color:#f0e9fa;
+max-width:720px;
+margin:0 auto 30px;
+color:#fff5fa;
+text-shadow:0 2px 15px rgba(0,0,0,.8);
 }
 .actions{
 display:flex;justify-content:center;
@@ -368,7 +405,7 @@ max-width:90vw;
 .form-grid{grid-template-columns:1fr;gap:0}
 .nav{flex-direction:column}
 .links{justify-content:center;gap:12px}
-.hero{min-height:560px}
+.hero{min-height:560px;background-position:45% center}
 .creator{padding:22px}
 section.section{padding:55px 0}
 }
