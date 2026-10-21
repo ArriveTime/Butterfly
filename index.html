@@ -913,6 +913,13 @@ document.querySelectorAll(".color-option").forEach(button=>{
  });
 });
 
+/* GOOGLE ANALYTICS: aggregate usage events only, no messages or locations */
+function trackButterflyEvent(name,details={}){
+ try{
+  if(typeof window.gtag==="function")window.gtag("event",name,details);
+ }catch(error){console.warn("Analytics event unavailable",error);}
+}
+
 /* ANONYMOUS SIGN-IN */
 
 async function ensureSignedIn(){
@@ -1035,6 +1042,7 @@ form.addEventListener("submit",async event=>{
 
   const id=crypto.randomUUID();
   await setDoc(doc(db,"butterflies",id),data);
+  trackButterflyEvent("butterfly_created",{message_category:data.category});
 
   renderButterfly(data,butterflyLink(id),false,id);
   updateLocalCount(data.city);
@@ -1198,6 +1206,7 @@ $("arrivalForm").addEventListener("submit",async event=>{
    createdAt:serverTimestamp(),
    uid:user.uid
   });
+  trackButterflyEvent("butterfly_passport_arrival");
 
   $("arrivalStatus").textContent=
    "Your city and country have been added! 🦋";
@@ -1242,8 +1251,9 @@ function sendByEmail(){
   "Send a Butterfly. Touch the World.\n"+
   "ByeButterfly.com";
 
- window.location.href=
-  "mailto:?subject="+encodeURIComponent(subject)+
+  trackButterflyEvent("butterfly_share",{share_method:"email"});
+  window.location.href=
+   "mailto:?subject="+encodeURIComponent(subject)+
   "&body="+encodeURIComponent(body);
 }
 
@@ -1261,8 +1271,9 @@ function sendByText(){
  const isiOS=/iPad|iPhone|iPod/i.test(navigator.userAgent)||
   (navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
 
- window.location.href=
-  "sms:"+(isiOS?"&":"?")+
+  trackButterflyEvent("butterfly_share",{share_method:"text"});
+  window.location.href=
+   "sms:"+(isiOS?"&":"?")+
   "body="+encodeURIComponent(body);
 }
 
@@ -1273,7 +1284,8 @@ async function copyButterfly(){
  }
 
  try{
-  await navigator.clipboard.writeText(currentLink);
+   await navigator.clipboard.writeText(currentLink);
+   trackButterflyEvent("butterfly_share",{share_method:"copy_link"});
   notify("Butterfly link copied!");
  }catch(error){
   shareLink.focus();
@@ -1295,6 +1307,7 @@ async function shareButterfly(){
     text:"Someone sent you a butterfly carrying a meaningful message.",
     url:currentLink
    });
+   trackButterflyEvent("butterfly_share",{share_method:"native_share"});
   }catch(error){
    if(error.name!=="AbortError"){
     notify("Please copy the link to share it.");
@@ -1334,7 +1347,9 @@ async function socialShare(platform){
  }
  if(destinations[platform]){
   const popup=window.open(destinations[platform],"_blank","noopener,noreferrer");
-  if(!popup)notify("Pop-up blocked. Please use Copy Link instead.");
+  if(popup){
+   trackButterflyEvent("butterfly_share",{share_method:platform});
+  }else notify("Pop-up blocked. Please use Copy Link instead.");
  }
 }
 
