@@ -409,6 +409,16 @@ section.section{padding:80px 0}
  html{scroll-behavior:auto}
  .floating,.preview-butterfly{animation:none}
 }
+/* Simpler, accessible three-step butterfly journey */
+.simple-step{display:flex;align-items:center;gap:12px;margin:14px 0 18px;color:#ffe6b8;font-size:20px;font-weight:900}
+.simple-step .number{display:inline-grid;place-items:center;width:36px;height:36px;border-radius:50%;background:#ffe0a1;color:#241831;flex-shrink:0}
+.optional-details{border:1px solid #ffffff55;border-radius:16px;padding:15px 18px;margin:18px 0;background:#ffffff0b}
+.optional-details summary{cursor:pointer;font-weight:800;color:#ffe3a4}
+.optional-details[open] summary{margin-bottom:18px}
+.simple-note{color:#d9d5eb;font-size:13px;margin:6px 0 17px}
+.simple-send{margin-top:20px}
+.simple-send .btn{flex:1;min-width:180px}
+#messageTemplate{font-weight:700}
 </style>
 </head>
 
@@ -490,37 +500,28 @@ section.section{padding:80px 0}
    </div>
 
    <form id="butterflyForm">
-    <div class="form-grid">
+     <div class="simple-step"><span class="number">1</span> Choose a Message</div>
      <div class="field">
-      <label for="sender">Your Name or Nickname</label>
-      <input id="sender" maxlength="60" placeholder="Your name (optional)">
-     </div>
-     <div class="field">
-      <label for="recipient">Who Is This Butterfly For?</label>
-      <input id="recipient" maxlength="70" placeholder="Someone special, or Everyone">
-     </div>
-    </div>
-
-    <div class="form-grid">
-     <div class="field">
-      <label for="category">What Is Your Message About?</label>
-      <select id="category">
-       <option value="Kindness">💛 Kindness</option>
-       <option value="Gratitude">🙏 Gratitude</option>
-       <option value="Love">❤️ Love</option>
-       <option value="Hope">🌈 Hope</option>
-       <option value="Encouragement">✨ Encouragement</option>
-       <option value="Remembrance">🕊️ Remembrance</option>
+      <label for="messageTemplate">Choose a ready-to-send message, or write your own</label>
+      <select id="messageTemplate">
+       <option value="thinking">💗 Thinking of You</option>
+       <option value="thanks">🙏 Thank You</option>
+       <option value="love">❤️ I Love You</option>
+       <option value="matter">✨ You Matter</option>
+       <option value="getwell">🌷 Get Well Soon</option>
+       <option value="congrats">🎉 Congratulations</option>
+       <option value="birthday">🎂 Happy Birthday</option>
+       <option value="hope">🌈 Sending Hope</option>
+       <option value="memory">🕊️ In Loving Memory</option>
+       <option value="own">✍️ Write My Own Message</option>
       </select>
      </div>
      <div class="field">
-      <label for="city">Starting City or Country</label>
-      <input id="city" maxlength="90" placeholder="Example: Williamsburg, Virginia">
+      <label for="message">Your Butterfly's Message — You Can Edit It</label>
+      <textarea id="message" maxlength="600" required></textarea>
+      <div class="help"><span id="charCount">0</span> / 600 characters</div>
      </div>
-    </div>
-
-    <div class="field">
-     <label>Choose Your Butterfly's Color</label>
+     <div class="simple-step"><span class="number">2</span> Choose Your Butterfly</div>
      <div class="colors" role="group" aria-label="Butterfly color">
       <button type="button" class="color-option color-pink" data-color="pink" aria-label="Pink butterfly" aria-pressed="true"></button>
       <button type="button" class="color-option color-blue" data-color="blue" aria-label="Blue butterfly" aria-pressed="false"></button>
@@ -528,31 +529,23 @@ section.section{padding:80px 0}
       <button type="button" class="color-option color-purple" data-color="purple" aria-label="Purple butterfly" aria-pressed="false"></button>
       <button type="button" class="color-option color-green" data-color="green" aria-label="Green butterfly" aria-pressed="false"></button>
      </div>
-    </div>
-
-    <div class="field">
-     <label for="message">Your Message to the World</label>
-     <textarea id="message" maxlength="600" required placeholder="Dear someone special,
-
-I wanted you to know that you made a difference in my life..."></textarea>
-     <div class="help"><span id="charCount">0</span> / 600 characters</div>
-    </div>
-
-    <div class="preview-area">
-     <div id="previewButterfly" class="preview-butterfly" style="--wing:#ff9fcf">🦋</div>
-     <h3>Your Butterfly Is Ready</h3>
-     <p>Every butterfly carries a little piece of someone's heart.</p>
-    </div>
-
-    <button type="submit" class="btn primary full">🦋 RELEASE MY BUTTERFLY</button>
-
-    <p class="notice">
-     Your butterfly will be saved in our database and given a shareable link.
-     Anyone with that link can read its message and recorded journey.
-     Please do not include confidential information.
-     Creating a butterfly does not automatically send it.
-    </p>
-   </form>
+     <details class="optional-details">
+      <summary>Optional: Add names, starting location, or message category</summary>
+      <div class="form-grid">
+       <div class="field"><label for="sender">Your Name or Nickname</label><input id="sender" maxlength="60" placeholder="Optional"></div>
+       <div class="field"><label for="recipient">Who Is This Butterfly For?</label><input id="recipient" maxlength="70" placeholder="Optional"></div>
+      </div>
+      <div class="form-grid">
+       <div class="field"><label for="category">Message Category</label>
+        <select id="category"><option>Kindness</option><option>Gratitude</option><option>Love</option><option>Hope</option><option>Encouragement</option><option>Remembrance</option></select></div>
+       <div class="field"><label for="city">Starting City or Country</label><input id="city" maxlength="90" placeholder="Optional"></div>
+      </div>
+     </details>
+     <div class="simple-step"><span class="number">3</span> Get Ready to Send</div>
+     <p class="simple-note">One tap saves your butterfly and shows easy Email and Text buttons. You choose the recipient in your messaging app.</p>
+     <button type="submit" class="btn primary full">🦋 CREATE MY BUTTERFLY</button>
+     <p class="notice">Free • No registration • Your butterfly is saved in Firebase and gets a shareable link. Creating it does not automatically send it. Anyone with the link can read its message and recorded journey. Please do not include confidential information.</p>
+    </form>
 
    <div class="result" id="result" aria-live="polite">
     <div class="result-card">
@@ -569,36 +562,35 @@ I wanted you to know that you made a difference in my life..."></textarea>
       Choose an option below. Your email or messaging application will open so you can select the recipient.
      </p>
 
-     <div class="share-buttons">
-      <button class="btn primary" id="emailButterfly" type="button">✉️ SEND BY EMAIL</button>
-      <button class="btn secondary" id="textButterfly" type="button">💬 SEND BY TEXT</button>
-      <button class="btn outline" id="copyLink" type="button">🔗 COPY LINK</button>
-     </div>
-     <div class="share-buttons">
-      <button class="btn outline" id="shareButterfly" type="button">📤 MORE SHARING OPTIONS</button>
-      <button class="btn outline" id="viewButterfly" type="button">🦋 VIEW BUTTERFLY</button>
-     </div>
-
-      <div class="social-share" aria-label="Share on social media">
-       <h4>🦋 Help This Butterfly Travel the World</h4>
-       <p>Share the same butterfly link so its passport journey stays together. You choose where to post.</p>
-       <div class="social-grid">
-        <button type="button" data-social="facebook">Facebook</button>
-        <button type="button" data-social="instagram">Instagram</button>
-        <button type="button" data-social="linkedin">LinkedIn</button>
-        <button type="button" data-social="whatsapp">WhatsApp</button>
-        <button type="button" data-social="x">X</button>
-        <button type="button" data-social="telegram">Telegram</button>
-        <button type="button" data-social="pinterest">Pinterest</button>
-        <button type="button" data-social="more">More options</button>
-       </div>
-       <p class="notice" style="margin-top:12px">Instagram and Pinterest require an additional posting step. The link can be copied for a message, Story, or post. Public posts may be visible beyond the intended recipient.</p>
+      <div class="share-buttons simple-send">
+       <button class="btn primary" id="emailButterfly" type="button">✉️ SEND BY EMAIL</button>
+       <button class="btn secondary" id="textButterfly" type="button">💬 SEND BY TEXT</button>
       </div>
-
-     <div class="field" style="margin-top:26px">
-      <label for="shareLink">Your Butterfly's Personal Link</label>
-      <textarea id="shareLink" class="share-link" rows="3" readonly></textarea>
-     </div>
+      <p class="simple-note center">Your email or text app opens so you can choose who receives the butterfly.</p>
+      <details class="optional-details">
+       <summary>More ways to share (copy link, social media, and more)</summary>
+       <div class="share-buttons">
+        <button class="btn outline" id="copyLink" type="button">🔗 COPY LINK</button>
+        <button class="btn outline" id="shareButterfly" type="button">📤 MORE SHARING OPTIONS</button>
+        <button class="btn outline" id="viewButterfly" type="button">🦋 VIEW BUTTERFLY</button>
+       </div>
+       <div class="social-share" aria-label="Share on social media">
+        <h4>🦋 Help This Butterfly Travel the World</h4>
+        <p>Share the same butterfly link so its passport journey stays together.</p>
+        <div class="social-grid">
+         <button type="button" data-social="facebook">Facebook</button>
+         <button type="button" data-social="instagram">Instagram</button>
+         <button type="button" data-social="linkedin">LinkedIn</button>
+         <button type="button" data-social="whatsapp">WhatsApp</button>
+         <button type="button" data-social="x">X</button>
+         <button type="button" data-social="telegram">Telegram</button>
+         <button type="button" data-social="pinterest">Pinterest</button>
+         <button type="button" data-social="more">More options</button>
+        </div>
+        <p class="notice">Instagram and Pinterest require an additional posting step. Public posts may be visible to others.</p>
+       </div>
+       <div class="field" style="margin-top:22px"><label for="shareLink">Your Butterfly's Personal Link</label><textarea id="shareLink" class="share-link" rows="3" readonly></textarea></div>
+      </details>
 
      <div class="passport" id="passportPanel">
       <h3>🦋 Butterfly Passport</h3>
@@ -899,6 +891,31 @@ function notify(text){
 messageInput.addEventListener("input",()=>{
  $("charCount").textContent=messageInput.value.length;
 });
+
+/* READY-TO-SEND MESSAGE TEMPLATES */
+const messageTemplates={
+ thinking:{category:"Kindness",text:"Just sending a little butterfly to remind you that someone is thinking of you today. 🦋"},
+ thanks:{category:"Gratitude",text:"Thank you for making a difference in my life. Your kindness means more than words can say."},
+ love:{category:"Love",text:"Sending you a butterfly filled with love and a reminder of how special you are to me."},
+ matter:{category:"Encouragement",text:"Never forget that you matter, you are appreciated, and the world is better with you in it."},
+ getwell:{category:"Hope",text:"Sending you love, strength, and wishes for brighter, healthier days ahead. Get well soon!"},
+ congrats:{category:"Encouragement",text:"Congratulations! Wishing you happiness, success, and many wonderful moments ahead."},
+ birthday:{category:"Love",text:"Happy Birthday! May your day be filled with joy, love, laughter, and beautiful surprises."},
+ hope:{category:"Hope",text:"When days feel difficult, remember that brighter moments can still be ahead. Sending hope your way."},
+ memory:{category:"Remembrance",text:"Some people never leave our hearts. Their love and memories stay with us forever."},
+ own:{category:"Kindness",text:""}
+};
+function applyMessageTemplate(){
+ const template=messageTemplates[$("messageTemplate").value]||messageTemplates.own;
+ messageInput.value=template.text;
+ $("category").value=template.category;
+ $("charCount").textContent=String(messageInput.value.length);
+}
+$("messageTemplate").addEventListener("change",()=>{
+ applyMessageTemplate();
+ if($("messageTemplate").value==="own")messageInput.focus();
+});
+applyMessageTemplate();
 
 document.querySelectorAll(".color-option").forEach(button=>{
  button.addEventListener("click",()=>{
@@ -1381,6 +1398,7 @@ $("newButterfly").addEventListener("click",()=>{
  result.classList.remove("show");
  form.classList.remove("hidden");
  form.reset();
+ applyMessageTemplate();
 
  selectedColor="pink";
  $("previewButterfly").style.setProperty("--wing",palette.pink);
