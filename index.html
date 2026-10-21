@@ -565,10 +565,12 @@ section.section{padding:80px 0}
       <div class="share-buttons simple-send">
        <button class="btn primary" id="emailButterfly" type="button">✉️ SEND BY EMAIL</button>
        <button class="btn secondary" id="textButterfly" type="button">💬 SEND BY TEXT</button>
+       <button class="btn outline" id="messengerButterfly" type="button">💙 MESSENGER</button>
+       <button class="btn outline" id="whatsappButterfly" type="button">🟢 WHATSAPP</button>
       </div>
       <p class="simple-note center">Your email or text app opens so you can choose who receives the butterfly.</p>
       <details class="optional-details">
-       <summary>More ways to share (copy link, social media, and more)</summary>
+       <summary>More Ways to Share (Instagram, LinkedIn, X, Facebook, Copy Link)</summary>
        <div class="share-buttons">
         <button class="btn outline" id="copyLink" type="button">🔗 COPY LINK</button>
         <button class="btn outline" id="shareButterfly" type="button">📤 MORE SHARING OPTIONS</button>
@@ -581,9 +583,8 @@ section.section{padding:80px 0}
          <button type="button" data-social="facebook">Facebook</button>
          <button type="button" data-social="instagram">Instagram</button>
          <button type="button" data-social="linkedin">LinkedIn</button>
-         <button type="button" data-social="whatsapp">WhatsApp</button>
-         <button type="button" data-social="x">X</button>
          <button type="button" data-social="telegram">Telegram</button>
+         <button type="button" data-social="x">X</button>
          <button type="button" data-social="pinterest">Pinterest</button>
          <button type="button" data-social="more">More options</button>
         </div>
@@ -666,6 +667,8 @@ section.section{padding:80px 0}
       <div class="share-buttons">
        <button class="btn primary" id="passEmail" type="button">✉️ PASS BY EMAIL</button>
        <button class="btn secondary" id="passText" type="button">💬 PASS BY TEXT</button>
+       <button class="btn outline" id="passMessenger" type="button">💙 MESSENGER</button>
+       <button class="btn outline" id="passWhatsapp" type="button">🟢 WHATSAPP</button>
        <button class="btn outline" id="passCopy" type="button">🔗 COPY TO PASS ALONG</button>
       </div>
       <p style="margin-top:25px">Or begin a new journey with your own message.</p>
@@ -1334,6 +1337,40 @@ async function shareButterfly(){
   await copyButterfly();
  }
 }
+
+// Messenger does not provide a dependable public web link that pre-fills
+// a private chat with a recipient. Copy the personal link and open Messenger.
+async function sendByMessenger(){
+ if(!currentLink){notify("Create a butterfly first.");return;}
+ // Open during the user's click so popup blockers are less likely to intervene.
+ const messengerWindow=window.open("https://www.messenger.com/","_blank");
+ try{
+  await navigator.clipboard.writeText(currentLink);
+  trackButterflyEvent("butterfly_share",{share_method:"messenger_copy_link"});
+  notify("Butterfly link copied! Choose a Messenger friend and paste the link.");
+ }catch(error){
+  shareLink.focus();shareLink.select();
+  notify("Select and copy your butterfly link, then paste it into Messenger.");
+ }
+ if(messengerWindow)messengerWindow.opener=null;
+ if(!messengerWindow){
+  notify("Link ready. Open Messenger yourself and paste the butterfly link.");
+ }
+}
+
+function sendByWhatsApp(){
+ if(!currentLink){notify("Create a butterfly first.");return;}
+ const message="🦋 A butterfly has arrived for you! Open your special message: "+currentLink;
+ const url="https://api.whatsapp.com/send?text="+encodeURIComponent(message);
+ const popup=window.open(url,"_blank");
+ if(popup){popup.opener=null;trackButterflyEvent("butterfly_share",{share_method:"whatsapp"});}
+ else notify("Please allow pop-ups or use Copy Link to share on WhatsApp.");
+}
+
+$("messengerButterfly").addEventListener("click",sendByMessenger);
+$("whatsappButterfly").addEventListener("click",sendByWhatsApp);
+$("passMessenger").addEventListener("click",sendByMessenger);
+$("passWhatsapp").addEventListener("click",sendByWhatsApp);
 
 $("emailButterfly").addEventListener("click",sendByEmail);
 $("textButterfly").addEventListener("click",sendByText);
